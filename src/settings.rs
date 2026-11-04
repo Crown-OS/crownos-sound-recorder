@@ -1,5 +1,5 @@
 use audio::{Enhancement, SourceId};
-use crownos_config::schema::{Recorder, RecorderEnhancement, RecorderFormat};
+use crownos_config::schema::{Recorder, RecorderFormat, VoiceEnhancement};
 
 use crate::encode::RecordingFormat;
 
@@ -27,10 +27,10 @@ impl Preferences {
                 RecorderFormat::Flac => RecordingFormat::Flac,
             },
             enhancement: match recorder.enhancement {
-                RecorderEnhancement::Off => Enhancement::Off,
-                RecorderEnhancement::Light => Enhancement::Light,
-                RecorderEnhancement::NoiseSuppression => Enhancement::NoiseSuppression,
-                RecorderEnhancement::StudioVoice => Enhancement::StudioVoice,
+                VoiceEnhancement::Off => Enhancement::Off,
+                VoiceEnhancement::Light => Enhancement::Light,
+                VoiceEnhancement::NoiseSuppression => Enhancement::NoiseSuppression,
+                VoiceEnhancement::StudioVoice => Enhancement::StudioVoice,
             },
             input: recorder.input.map(SourceId::new),
         }
@@ -43,10 +43,10 @@ impl Preferences {
                 RecordingFormat::Flac => RecorderFormat::Flac,
             },
             enhancement: match self.enhancement {
-                Enhancement::Off => RecorderEnhancement::Off,
-                Enhancement::Light => RecorderEnhancement::Light,
-                Enhancement::NoiseSuppression => RecorderEnhancement::NoiseSuppression,
-                Enhancement::StudioVoice => RecorderEnhancement::StudioVoice,
+                Enhancement::Off => VoiceEnhancement::Off,
+                Enhancement::Light => VoiceEnhancement::Light,
+                Enhancement::NoiseSuppression => VoiceEnhancement::NoiseSuppression,
+                Enhancement::StudioVoice => VoiceEnhancement::StudioVoice,
             },
             input: self.input.as_ref().map(|source| source.as_str().to_owned()),
         };
