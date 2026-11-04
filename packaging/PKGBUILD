@@ -6,13 +6,14 @@
 # ../crownos-config and ../crownui (plus whatever those path-depend on).
 
 pkgname=crownos-sound-recorder
-pkgver=0.1.0
+pkgver=0.1.1
 pkgrel=1
 pkgdesc="Voice recorder for CrownOS"
 arch=(x86_64)
 url="https://github.com/Crown-OS/crownos-sound-recorder"
 license=('MIT OR Apache-2.0')
-depends=(ffmpeg pipewire crownos-voice glibc gcc-libs wayland libxkbcommon vulkan-icd-loader)
+depends=(ffmpeg pipewire glibc gcc-libs wayland libxkbcommon vulkan-icd-loader)
+optdepends=("crownos-voice: AI noise suppression and Enhance")
 makedepends=(cargo clang)
 options=(!lto !debug)
 
