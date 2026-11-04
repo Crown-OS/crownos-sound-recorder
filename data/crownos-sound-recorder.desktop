@@ -1,0 +1,11 @@
+[Desktop Entry]
+Type=Application
+Name=Voice Recorder
+GenericName=Sound Recorder
+Comment=Record, play back and enhance voice recordings
+Exec=crownos-sound-recorder
+Icon=gnome-sound-recorder
+Terminal=false
+Categories=AudioVideo;Audio;Recorder;
+Keywords=record;recorder;voice;microphone;audio;memo;
+StartupWMClass=crownos-sound-recorder

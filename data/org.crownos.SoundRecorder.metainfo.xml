@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component type="desktop-application">
+  <id>org.crownos.SoundRecorder</id>
+  <metadata_license>CC0-1.0</metadata_license>
+  <project_license>MIT OR Apache-2.0</project_license>
+  <name>Voice Recorder</name>
+  <summary>Record, play back and enhance voice recordings</summary>
+  <developer id="org.crownos">
+    <name>CrownOS</name>
+  </developer>
+  <description>
+    <p>
+      Voice Recorder captures audio from any microphone, keeps a library of your recordings
+      and plays them back.
+    </p>
+    <p>
+      With the CrownOS voice service installed, it can remove background noise and echo,
+      both while recording and afterwards, entirely on your own device.
+    </p>
+  </description>
+  <launchable type="desktop-id">crownos-sound-recorder.desktop</launchable>
+  <url type="homepage">https://github.com/Crown-OS/crownos-sound-recorder</url>
+  <url type="bugtracker">https://github.com/Crown-OS/crownos-sound-recorder/issues</url>
+  <provides>
+    <binary>crownos-sound-recorder</binary>
+  </provides>
+  <requires>
+    <display_length compare="ge">360</display_length>
+  </requires>
+  <supports>
+    <control>pointing</control>
+    <control>keyboard</control>
+  </supports>
+  <categories>
+    <category>AudioVideo</category>
+    <category>Audio</category>
+    <category>Recorder</category>
+  </categories>
+  <keywords>
+    <keyword>record</keyword>
+    <keyword>voice</keyword>
+    <keyword>microphone</keyword>
+  </keywords>
+  <content_rating type="oars-1.1"/>
+  <releases>
+    <release version="0.1.0" date="2026-11-04"/>
+  </releases>
+</component>
