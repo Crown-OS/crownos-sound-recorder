@@ -298,26 +298,28 @@ Write these into `crownui/docs/media.md` in the first PR. That doc is the meetin
 | M8 | Installer Features page, `InstallAiSupport`, `ai.ron`, first-boot service, metas, ISO lists, autoinstall test | M1, M6 | M7 |
 | M9 | Settings Voice page, `enhance_all_apps`, PipeWire-name migration; optional Maxine plugin | M7, M8 | — |
 
-## 10. Task checklist (status 2026-11-04)
+## 10. Task checklist (status 2026-11-05)
 
 - [x] M0: `crownui/docs/media.md`, CUI07xx reserved, CUI08xx noted for video; seams agreed with camera (§0)
 - [~] M1: hardware probe: the installer side is owned by camera (`util/pci.rs`, `engine/ai.rs`). The voice runtime probes plugins instead (`voiced/src/registry/`)
-- [x] M2: `voice-abi` (vtable with latency), `voice-engine` (accumulator/dispenser, HighPass, LevelControl, Limiter, Loudness, Chain, `dfn`), CPU backend (RNNoise + DeepFilterNet3 via `deep-filter-rt`)
-- [x] M3: `kit/level_meter`, `kit/waveform` (`waveform`, `live_waveform`), previews and tests
-- [x] M4: `crown-voiced`: socket activation, idle exit, PipeWire node per stream, deadline fallback and demotion, async replies, probe cache, self-capture guard, offline jobs with latency alignment and loudness
-- [x] M5: crownui `audio` crate + `kit::use_microphone`, facade feature, bundle entry, `api/audio.txt`
-- [x] M6: `onnx` backend (offline only; TensorRT/CUDA, MIGraphX, OpenVINO, VitisAI, CPU). **Not yet run against a real ONNX Runtime**
-- [x] M7: recorder app (library, recorder, playback, rename/trash, offline Enhance, `recorder` config section)
-- [~] M8: packaging written (`crownos-voice`, `crownos-voice-onnx`, `crownos-sound-recorder`). Installer, metas and ISO lists are owned by camera, pending published releases (`optional-components.txt`)
-- [ ] M9: Settings Voice page, `enhance_all_apps`, cpal → PipeWire names, optional Maxine plugin
+- [x] M2: `voice-abi` (vtable with latency), `voice-engine`, CPU backend (RNNoise + DeepFilterNet3 via `deep-filter-rt`)
+- [x] M3: `kit/level_meter`, `kit/waveform`, previews and tests
+- [x] M4: `crown-voiced`: socket activation, idle exit, node per stream, deadline fallback and demotion, probe cache, self-capture guard, offline jobs
+- [x] M5: crownui `audio` crate + `kit::use_microphone` (merged into crownui `main`)
+- [x] M6: `onnx` backend (offline only). Tested on GitHub CI against Arch `onnxruntime-cpu` 1.29 (CPU EP only; no GPU on runners)
+- [x] M7: recorder app
+- [~] M8: packaging and CI/CD in all repos, v0.1.0 releases. crownos-voice is an optdepend of the recorder; the ISO ships the recorder, and voice waits for the AI-features path (crownos-ai-* metas), which doesn't exist yet
+- [x] M9: `voice` config section, `enhance_all_apps` (persistent `crownos-voice.all-apps` node as default source, started at login), backend preference with `ServiceStatus::{realtime,offline}_backend`, Settings Voice page, Settings Input page and crowndictator moved from cpal to PipeWire node names via the `audio` crate
+- [x] Licences (MIT OR Apache-2.0), CI integration workflow (`crownos-voice/.github/workflows/integration.yml`: ONNX, daemon E2E per profile, headless PipeWire live stream)
 
 ### Follow-ups
-- [ ] Live-test the onnx backend once `onnxruntime-crownos` exists (`cargo test --release -p crownos-voice-backend-onnx -- --ignored`)
-- [ ] Real-time GPU denoise needs a stateful (GRU state as I/O) DeepFilterNet3 ONNX export; the official files can't stream
-- [ ] Rebase `crownui-audio` (branch `audio`, based on `main`) onto crownui once `files-app` compiles again; then point the recorder at `../crownui`
-- [ ] crownui gaps found by the recorder: tabular numerals, `text_input` autofocus, public `follow_watch`, handler scope for `cx.spawn`, a crowntest task executor
-- [ ] Create the GitHub repos `Crown-OS/crownos-voice` and `Crown-OS/crownos-sound-recorder`, then add them to the ISO lists (camera's `optional-components.txt` for voice)
-- [ ] Add LICENSE files (packaging assumes `MIT OR Apache-2.0`)
+- [ ] Tag recorder v0.1.1 (crownos-voice as optdepend) so the ISO can ship it
+- [ ] Live-test GPU execution providers (CUDA/MIGraphX/OpenVINO/VitisAI) on real hardware once `onnxruntime-crownos-*` exist
+- [ ] Real-time GPU denoise needs a stateful (GRU state as I/O) DeepFilterNet3 ONNX export
+- [ ] Optional Maxine plugin (NGC-gated SDK)
+- [ ] The `audio` crate captures nothing until crown-voiced answers (up to 3 s); start raw and switch to enhanced, so push-to-talk never loses its first words
+- [ ] Per-app streams with no source while all-apps is on capture the highest-priority mic, not the one the all-apps node follows
+- [ ] crownui gaps (handed to the crownui session): tabular numerals, `text_input` autofocus, public `follow_watch`, `cx.spawn` handler scope, crowntest task executor
 
 ## 11. Risks
 
