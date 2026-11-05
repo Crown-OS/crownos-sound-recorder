@@ -313,7 +313,7 @@ Write these into `crownui/docs/media.md` in the first PR. That doc is the meetin
 - [x] Licences (MIT OR Apache-2.0), CI integration workflow (`crownos-voice/.github/workflows/integration.yml`: ONNX, daemon E2E per profile, headless PipeWire live stream)
 
 ### Follow-ups
-- [ ] Tag recorder v0.1.1 (crownos-voice as optdepend) so the ISO can ship it
+- [x] Recorder v0.1.1 released (crownos-voice as optdepend), shipped by the ISO
 - [ ] Live-test GPU execution providers (CUDA/MIGraphX/OpenVINO/VitisAI) on real hardware once `onnxruntime-crownos-*` exist
 - [ ] Real-time GPU denoise needs a stateful (GRU state as I/O) DeepFilterNet3 ONNX export
 - [ ] Optional Maxine plugin (NGC-gated SDK)
