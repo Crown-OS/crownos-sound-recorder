@@ -47,10 +47,10 @@ portal (deferred; it is a shared item with camera, see §8).
 | Lazy ONNX session, EP probe, idle unload | `crowndictator/src/asr/mod.rs` (`session_for` L49, `cuda_usable` L66, engine thread `spawn` L303) |
 | PipeWire capture into an `rtrb` ring | `crownos-screencapture/src/record/audio/capture.rs` |
 | Opus/Ogg encoder + muxer | `crownos-screencapture/src/record/audio/encoder.rs`, `record/mux.rs`, `record_voice` (record/mod.rs:204) |
-| Virtual `Audio/Source` node (10 ms) | `crownconnect-linux/src/media/audio/pw_source.rs` (`VirtualMicrophone`) |
-| Capture from a chosen node (`TARGET_OBJECT`) | `crownconnect-linux/src/media/audio/pw_sink.rs` |
-| PipeWire thread, SPSC PCM ring | `crownconnect-linux/src/media/audio/{pw_thread,pcm_ring}.rs` |
-| Source listing with hotplug | `crownconnect-linux/src/state/publishers/volume/graph.rs` (switch the filter to `Audio/Source`) |
+| Virtual `Audio/Source` node (10 ms) | `crownlink-linux/src/media/audio/pw_source.rs` (`VirtualMicrophone`) |
+| Capture from a chosen node (`TARGET_OBJECT`) | `crownlink-linux/src/media/audio/pw_sink.rs` |
+| PipeWire thread, SPSC PCM ring | `crownlink-linux/src/media/audio/{pw_thread,pcm_ring}.rs` |
+| Source listing with hotplug | `crownlink-linux/src/state/publishers/volume/graph.rs` (switch the filter to `Audio/Source`) |
 | Waveform painting and spring smoothing | `crowndictator/src/waveform/{animation,paint}.rs`, `state.rs::VizState` |
 | Streaming worker → signal bridge | `crownui/widgets/src/kit/theme/follow.rs::follow_config` (re-arming `cx.spawn`) |
 | Level meter template | `crownui/widgets/src/kit/progress/` |
