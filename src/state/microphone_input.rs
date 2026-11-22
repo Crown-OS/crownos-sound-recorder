@@ -5,7 +5,8 @@ use crownui::prelude::{Cx, Signal};
 use super::{Capture, FrameFeed};
 
 /// The recorder's input: a live microphone, open while the calling component is mounted, or a
-/// synthetic tone.
+/// synthetic tone whose level and state come from a `MicrophoneInput` provided by an ancestor,
+/// when there is one.
 #[derive(Debug, Clone, Copy)]
 pub enum MicrophoneInput {
     Live(MicrophoneSignals),
@@ -19,9 +20,12 @@ impl MicrophoneInput {
     pub fn open(cx: &mut Cx, capture: Capture, options: MicrophoneOptions) -> Self {
         match capture {
             Capture::Microphone => Self::Live(use_microphone(cx, options)),
-            Capture::Tone => Self::Synthetic {
-                level: cx.signal(Level::default()),
-                state: cx.signal(StreamState::Live { enhanced_by: None }),
+            Capture::Tone => match cx.environment::<Self>() {
+                Some(provided) => provided.with_untracked(cx, |input| *input),
+                None => Self::Synthetic {
+                    level: cx.signal(Level::default()),
+                    state: cx.signal(StreamState::Live { enhanced_by: None }),
+                },
             },
         }
     }

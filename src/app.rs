@@ -22,19 +22,24 @@ const THEME_FADE_MILLIS: u64 = 240;
 /// Opens the recorder window on the user's library and runs it until it closes.
 pub fn run() -> Result<()> {
     let environment = Environment::system()?;
-    let config = AppConfig::new(TITLE)
-        .app_id(APP_ID)
-        .size(INITIAL_SIZE.0, INITIAL_SIZE.1)
-        .min_size(MIN_SIZE.0, MIN_SIZE.1)
-        .clear_color(BLACK)
-        .mcp(cfg!(debug_assertions))
-        .font(inter_font().to_vec(), Some(INTER_FAMILY));
+    let config = app_config();
     let root = component(move |cx| {
         provide_configured_theme(cx);
         let state = AppState::new(cx, environment);
         shell(cx, state)
     });
     Ok(crownui::run(root, config)?)
+}
+
+/// The recorder window: its title, size, clear color and Inter as the UI face.
+pub fn app_config() -> AppConfig {
+    AppConfig::new(TITLE)
+        .app_id(APP_ID)
+        .size(INITIAL_SIZE.0, INITIAL_SIZE.1)
+        .min_size(MIN_SIZE.0, MIN_SIZE.1)
+        .clear_color(BLACK)
+        .mcp(cfg!(debug_assertions))
+        .font(inter_font().to_vec(), Some(INTER_FAMILY))
 }
 
 /// Everything the window draws: the library beside the recorder or the selected recording,
