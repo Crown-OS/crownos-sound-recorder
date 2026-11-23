@@ -11,7 +11,7 @@ anyhow = "1"
 thiserror = "2"
 chrono = { version = "0.4", default-features = false, features = ["clock"] }
 dirs = "6"
-ffmpeg-next = { version = "9.0.0", default-features = false, features = [
+ffmpeg-next = { version = "9.1.0", default-features = false, features = [
   "codec",
   "format",
   "software-resampling",
